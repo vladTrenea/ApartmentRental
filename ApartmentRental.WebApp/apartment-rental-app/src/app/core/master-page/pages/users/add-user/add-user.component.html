@@ -1,0 +1,80 @@
+<form #addUserForm="ngForm" novalidate>
+    <div class="row">
+        <fieldset class="form-group col-lg-7 col-md-7">
+            <label class="ng-tns-c24-2" for="email">{{'Users.Labels.Email' | translate}}*</label>
+            <input #email="ngModel" class="form-control" type="email" id="email" name="email"
+                   [pattern]="emailRegex" maxlength="{{maxTextInputLength}}" [(ngModel)]="user.email" appNotEmpty>
+            <div *ngIf="formSubmitted">
+                <div class="input-error" *ngIf="email.errors?.notEmpty">
+                    {{'Users.Errors.EmailRequired' | translate}}
+                </div>
+
+                <div class="input-error" *ngIf="!email.errors?.notEmpty && email.errors?.pattern">
+                    {{'Users.Errors.InvalidEmail' | translate}}
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="row">
+        <fieldset class="form-group col-lg-7 col-md-7">
+            <label class="ng-tns-c24-2" for="firstName">{{'Users.Labels.FirstName' | translate}}*</label>
+            <input #firstName="ngModel" class="form-control" type="text" id="firstName" name="firstName"
+                   [pattern]="onlyLettersRegex" maxlength="{{maxTextInputLength}}" [(ngModel)]="user.firstName" appNotEmpty>
+            <div *ngIf="formSubmitted">
+                <div class="input-error" *ngIf="firstName.errors?.notEmpty">
+                    {{'Users.Errors.FirstNameRequired' | translate}}
+                </div>
+
+                <div class="input-error" *ngIf="!firstName.errors?.notEmpty && firstName.errors?.pattern">
+                    {{'Users.Errors.OnlyLettersRequired' | translate}}
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="row">
+        <fieldset class="form-group col-lg-7 col-md-7">
+            <label class="ng-tns-c24-2" for="lastName">{{'Users.Labels.LastName' | translate}}*</label>
+            <input #lastName="ngModel" class="form-control" type="text" id="lastName" name="lastName"
+                   [pattern]="onlyLettersRegex" maxlength="{{maxTextInputLength}}" [(ngModel)]="user.lastName" appNotEmpty>
+            <div *ngIf="formSubmitted">
+                <div class="input-error" *ngIf="lastName.errors?.notEmpty">
+                    {{'Users.Errors.LastNameRequired' | translate}}
+                </div>
+
+                <div class="input-error" *ngIf="!lastName.errors?.notEmpty && lastName.errors?.pattern">
+                    {{'Users.Errors.OnlyLettersRequired' | translate}}
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="row">
+        <fieldset class="form-group col-lg-2 col-md-3">
+            <label for="role">{{'Users.Labels.Role' | translate}}*</label>
+            <select #role="ngModel" class="form-control" id="role" name="role" [(ngModel)]="selectedRoleId" appNotEmpty>
+                <option *ngFor="let userRole of roles" [ngValue]="userRole.id">
+                    {{userRole.name}}
+                </option>
+            </select>
+            <div class="input-error" *ngIf="formSubmitted && role.errors">
+                {{'Users.Errors.RoleRequired' | translate}}
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="row" *ngIf="errorMessage">
+        <fieldset class="form-group col-lg-8 col-md-8">
+            <div class="input-error form-server-error">
+                {{errorMessage}}
+            </div>
+        </fieldset>
+    </div>
+
+    <div>
+        <button class="btn btn-primary" type="button" (click)="addUser(addUserForm.form.valid)">{{'Labels.Save' | translate}}</button>
+        &nbsp;
+        <button class="btn btn-danger" type="button" (click)="goToList()">{{'Labels.Cancel' | translate}}</button>
+    </div>
+</form>

@@ -1,0 +1,152 @@
+<div class="row" *ngIf="userAuthorization.roleId == roleEnum.admin || userAuthorization.roleId == roleEnum.realtor">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="go-right">
+            <button class="btn btn-primary" (click)="goToAddApartment()">{{'Apartments.Labels.NewApartment' | translate}}</button>
+        </div>
+    </div>
+</div>
+<br/>
+
+<div class="row" #container>
+    <div class="col-lg-4 col-md-4">
+        <form #searchApartmentForm="ngForm" (keyup.enter)="searchApartments()" novalidate>
+
+            <div class="row">
+                <div class="col-md-5 col-lg-5">
+                    <fieldset class="form-group">
+                        <label for="minArea">{{'Apartments.Labels.MinArea' | translate}} (m<sup>2</sup>)</label>
+                        <input #minArea="ngModel" class="form-control" type="text" id="minArea" name="minArea"
+                               [pattern]="doubleNumberRegex" [(ngModel)]="filter.minArea">
+                        <div class="input-error" *ngIf="minArea.errors">
+                            {{'Apartments.Errors.InvalidValue' | translate}}
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-1 col-lg-1">
+                </div>
+                <div class="col-md-5 col-lg-5">
+                    <fieldset class="form-group">
+                        <label for="maxArea">{{'Apartments.Labels.MaxArea' | translate}} (m<sup>2</sup>)</label>
+                        <input #maxArea="ngModel" class="form-control" type="text" id="maxArea" name="maxArea"
+                               [pattern]="doubleNumberRegex" [(ngModel)]="filter.maxArea">
+                        <div class="input-error" *ngIf="maxArea.errors">
+                            {{'Apartments.Errors.InvalidValue' | translate}}
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 col-lg-5">
+                    <fieldset class="form-group">
+                        <label for="minNrRooms">{{'Apartments.Labels.MinNrRooms' | translate}}</label>
+                        <input #minNrRooms="ngModel" class="form-control" type="text" id="minNrRooms" name="minNrRooms"
+                               [pattern]="naturalNumberRegex" [(ngModel)]="filter.minNrRooms">
+                        <div class="input-error" *ngIf="minNrRooms.errors">
+                            {{'Apartments.Errors.InvalidValue' | translate}}
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-1 col-lg-1">
+                </div>
+                <div class="col-md-5 col-lg-5">
+                    <fieldset class="form-group">
+                        <label for="maxNrRooms">{{'Apartments.Labels.MaxNrRooms' | translate}}</label>
+                        <input #maxNrRooms="ngModel" class="form-control" type="text" id="maxNrRooms" name="maxNrRooms"
+                               [pattern]="naturalNumberRegex" [(ngModel)]="filter.maxNrRooms">
+                        <div class="input-error" *ngIf="maxNrRooms.errors">
+                            {{'Apartments.Errors.InvalidValue' | translate}}
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 col-lg-5">
+                    <fieldset class="form-group">
+                        <label for="minPrice">{{'Apartments.Labels.MinPrice' | translate}} ($)</label>
+                        <input #minPrice="ngModel" class="form-control" type="text" id="minPrice" name="minPrice"
+                               [pattern]="doubleNumberRegex" [(ngModel)]="filter.minPrice">
+                        <div class="input-error" *ngIf="minPrice.errors">
+                            {{'Apartments.Errors.InvalidValue' | translate}}
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-1 col-lg-1">
+                </div>
+                <div class="col-md-5 col-lg-5">
+                    <fieldset class="form-group">
+                        <label for="maxPrice">{{'Apartments.Labels.MaxPrice' | translate}} ($)</label>
+                        <input #maxPrice="ngModel" class="form-control" type="text" id="maxPrice" name="maxPrice"
+                               [pattern]="doubleNumberRegex" [(ngModel)]="filter.maxPrice">
+                        <div class="input-error" *ngIf="maxPrice.errors">
+                            {{'Apartments.Errors.InvalidValue' | translate}}
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-11 col-md-11">
+                    <button class="btn btn-primary btn-block" type="button"
+                            (click)="searchApartments()">{{'Labels.Search' | translate}}</button>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:5px;">
+                <div class="col-lg-11 col-md-11">
+                    <button class="btn btn-secondary btn-block" type="reset">{{'Labels.Reset' | translate}}</button>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-lg-11 col-md-11 pre-scrollable apartments-list">
+                    <div class="panel panel-info" *ngFor="let apartment of apartments">
+                        <div class="panel-heading">
+                            <span class="btn btn-link apartment-title" (click)="openMarkerWindow(apartment.id)">{{apartment.title}}</span></div>
+                        <div class="panel-body">
+                            <h5 class="card-subtitle mb-2 text-muted">{{apartment.description}}</h5>
+                            <p class="card-text">
+                                <strong>{{'Apartments.Labels.Area' | translate}}</strong>: {{apartment.area}} m<sup>2</sup></p>
+                            <p class="card-text">
+                                <strong>{{'Apartments.Labels.NrRooms' | translate}}</strong>: {{apartment.nrOfRooms}}
+                            </p>
+                            <p class="card-text">
+                                <strong>{{'Apartments.Labels.PricePerMonth' | translate}}</strong>: {{apartment.pricePerMonth}} $
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-8 col-md-8">
+        <agm-map #gm [latitude]="mapCenterDefaultLatitude" [longitude]="mapCenterDefaultLongitude"
+                 [zoom]="mapZoom" [minZoom]="mapMinZoom"
+                 (boundsChange)="onBoundsChange($event)"
+                 (idle)="onMapIdle()">
+            <agm-marker *ngFor="let apartment of apartments"
+                        [latitude]="apartment.latitude"
+                        [longitude]="apartment.longitude"
+                        [iconUrl]="apartment.isRented ? redMarkerIcon : blueMarkerIcon"
+                        (markerClick)="openMarkerWindow(apartment.id)">
+
+                <agm-info-window
+                    [isOpen]="isInfoWindowOpen(apartment.id)"
+                    [latitude]="apartment.latitude"
+                    [longitude]="apartment.longitude">
+                    <div>
+                        <h4><a routerLink="/apartments/view/{{apartment.id}}">{{apartment.title}}</a></h4>
+                        <div><strong>{{'Apartments.Labels.Area' | translate}}</strong>: {{apartment.area}} m<sup>2</sup></div>
+                        <div><strong>{{'Apartments.Labels.NrRooms' | translate}}</strong>: {{apartment.nrOfRooms}}</div>
+                        <div><strong>{{'Apartments.Labels.PricePerMonth' | translate}}</strong>: {{apartment.pricePerMonth}} $</div>
+                    </div>
+                </agm-info-window>
+
+            </agm-marker>
+        </agm-map>
+    </div>
+</div>
+
+

@@ -1,0 +1,96 @@
+<div class="container">
+    <div id="login-box">
+        <div class="logo">
+            <h1 class="logo-caption"><span class="tweak">R</span>egister</h1>
+        </div><!-- /.logo -->
+        <div class="controls">
+            <form #registerForm="ngForm" (keyup.enter)="register(registerForm.form.valid)" novalidate *ngIf="!registered">
+                <input #userEmail="ngModel" id="userEmail" type="email" name="userEmail" class="form-control"
+                       placeholder="{{'Register.Labels.Email' | translate}}"
+                       maxlength="{{maxTextInputLength}}" [pattern]="emailRegex" [(ngModel)]="registerModel.email" appNotEmpty/>
+                <div *ngIf="formSubmitted">
+                    <div class="input-error" *ngIf="userEmail.errors?.notEmpty">
+                        {{'Register.Errors.EmailRequired' | translate}}
+                    </div>
+
+                    <div class="input-error" *ngIf="!userEmail.errors?.notEmpty && userEmail.errors?.pattern">
+                        {{'Register.Errors.InvalidEmail' | translate}}
+                    </div>
+                </div>
+                <br/>
+
+                <input #password="ngModel" id="password" type="password" name="password" class="form-control"
+                       placeholder="{{'Register.Labels.Password' | translate}}"
+                       maxlength="{{maxTextInputLength}}" [pattern]="passwordRegex" [(ngModel)]="registerModel.password" appNotEmpty/>
+                <div *ngIf="formSubmitted">
+                    <div class="input-error" *ngIf="password.errors?.notEmpty">
+                        {{'Register.Errors.PasswordRequired' | translate}}
+                    </div>
+
+                    <div class="input-error" *ngIf="!password.errors?.notEmpty && password.errors?.pattern">
+                        {{'Register.Errors.InvalidPassword' | translate}}
+                    </div>
+                </div>
+                <br/>
+
+                <input #confirmPassword="ngModel" id="confirmPassword" type="password" name="confirmPassword" class="form-control"
+                       placeholder="{{'Register.Labels.ConfirmPassword' | translate}}"
+                       maxlength="{{maxTextInputLength}}" [(ngModel)]="registerModel.confirmPassword" appNotEmpty validateEqual="password"/>
+                <div *ngIf="formSubmitted">
+                    <div class="input-error" *ngIf="confirmPassword.errors?.notEmpty">
+                        {{'Register.Errors.ConfirmPasswordRequired' | translate}}
+                    </div>
+                    <div class="input-error" *ngIf="!confirmPassword.errors?.notEmpty && confirmPassword.errors?.validateEqual">
+                        {{'Register.Errors.PasswordsDoNotMatch' | translate}}
+                    </div>
+                </div>
+                <br/>
+
+                <input #firstName="ngModel" id="firstName" type="text" name="firstName" class="form-control"
+                       placeholder="{{'Register.Labels.FirstName' | translate}}"
+                       maxlength="{{maxTextInputLength}}" [pattern]="onlyLettersRegex" [(ngModel)]="registerModel.firstName" appNotEmpty/>
+                <div *ngIf="formSubmitted">
+                    <div class="input-error" *ngIf="firstName.errors?.notEmpty">
+                        {{'Register.Errors.FirstNameRequired' | translate}}
+                    </div>
+
+                    <div class="input-error" *ngIf="!firstName.errors?.notEmpty && firstName.errors?.pattern">
+                        {{'Register.Errors.OnlyLettersRequired' | translate}}
+                    </div>
+                </div>
+                <br/>
+
+                <input #lastName="ngModel" id="lastName" type="text" name="lastName" class="form-control"
+                       placeholder="{{'Register.Labels.LastName' | translate}}"
+                       maxlength="{{maxTextInputLength}}" [pattern]="onlyLettersRegex" [(ngModel)]="registerModel.lastName" appNotEmpty/>
+                <div *ngIf="formSubmitted">
+                    <div class="input-error" *ngIf="lastName.errors?.notEmpty">
+                        {{'Register.Errors.LastNameRequired' | translate}}
+                    </div>
+
+                    <div class="input-error" *ngIf="!lastName.errors?.notEmpty && lastName.errors?.pattern">
+                        {{'Register.Errors.OnlyLettersRequired' | translate}}
+                    </div>
+                </div>
+
+                <div class="input-error api-error" *ngIf="errorMessage">
+                    {{errorMessage}}
+                </div>
+                <br/>
+
+                <button type="button" class="btn btn-default btn-block btn-custom" (click)="register(registerForm.form.valid)">
+                    {{'Register.Labels.Register' | translate}}
+                </button>
+                <br/>
+            </form>
+            <div *ngIf="registered">
+                <p class="forgot-password-text" align="center">
+                    <span>{{'Register.Labels.RegistrationSuccessfulLabel' | translate}} </span>
+                    <br/>
+                    <br/>
+                    <a class="app-link" routerLink="/login"> {{'Register.Labels.LoginLink' | translate}}</a>
+                </p>
+            </div>
+        </div><!-- /.controls -->
+    </div><!-- /#login-box -->
+</div><!-- /.container -->

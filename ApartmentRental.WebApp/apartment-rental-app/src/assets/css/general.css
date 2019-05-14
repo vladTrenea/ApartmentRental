@@ -1,0 +1,79 @@
+.input-error {
+    padding-left: 1px;
+    padding-top: 5px;
+    color: #ff5252;
+    font-size:14px;
+}
+
+.api-error {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.form-server-error {
+    font-size:15px;
+    color:red;
+    margin-bottom:5px;
+}
+
+.page-container {
+    margin-top: 40px;
+}
+
+.go-right {
+    float:right;
+    margin-bottom: 5px;
+}
+
+.go-left {
+    float:left;
+}
+
+.page-link {
+    cursor:pointer !important;
+}
+
+.action-item {
+    cursor: pointer;
+    padding: 0px 2px 0px 2px;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.page-container .pagination {
+    float:right;
+    position:relative;
+    left:-45%;
+    text-align:left;
+}
+
+.page-container .pagination ul {
+    list-style:none;
+    position:relative;
+    left:45%;
+}
+
+.page-container .pagination li {
+    float:left;
+    position:relative;
+}
+
+#page-wrapper {
+    min-height: 1050px !important;
+}
+
+.apartments-map {
+    min-height:200px;
+    height: 100%;
+}
+
+.app-link:hover{
+    text-decoration: none;
+}
+
+#info-forgot-password-message {
+    color:white;
+}

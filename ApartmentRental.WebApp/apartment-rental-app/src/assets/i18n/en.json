@@ -1,0 +1,170 @@
+{
+    "Labels": {
+        "Save": "Save",
+        "Cancel": "Cancel",
+        "Search": "Search",
+        "Back": "Back",
+        "Edit": "Edit",
+        "Delete": "Delete",
+        "Ok": "Ok",
+        "View": "View",
+        "Home": "Home",
+        "Reset": "Reset"
+    },
+    "Errors": {
+        "403": "Forbidden",
+        "404": "Not Found",
+        "500": "Internal Server Error",
+        "Unknown": "Something Went Wrong"
+    },
+    "Menu": {
+        "Logout": "Logout",
+        "Profile": "Profile",
+        "Apartments": "Apartments",
+        "Users": "Users",
+        "MyAccount": "My Account"
+    },
+    "Login": {
+        "Labels": {
+            "Email": "Email",
+            "Password": "Password",
+            "Login": "Login",
+            "RegisterLabel": "Don't have an account?",
+            "RegisterLink": "Register",
+            "ForgotPasswordLabel": "Forgot your password?",
+            "ForgotPasswordLink": "Reset"
+        },
+        "Errors": {
+            "EmailRequired": "Email is required",
+            "InvalidEmail": "Invalid email",
+            "PasswordRequired": "Password is required"
+        }
+    },
+    "Register": {
+        "Labels": {
+            "Email": "Email",
+            "FirstName": "FirstName",
+            "LastName": "LastName",
+            "Password": "Password",
+            "ConfirmPassword": "Confirm Password",
+            "Register": "Register",
+            "RegistrationSuccessfulLabel": "Registration successful. An email has been sent to you to confirm your account.",
+            "LoginLink": "Login"
+        },
+        "Errors": {
+            "EmailRequired": "Email is required",
+            "InvalidEmail": "Invalid email",
+            "FirstNameRequired": "First Name is required",
+            "OnlyLettersRequired": "Only letters are allowed",
+            "LastNameRequired": "Last Name is required",
+            "PasswordRequired": "Password is required",
+            "InvalidPassword": "Password must have minimum 8 characters and contain at least one uppercase letter, one lowercase letter and one digit",
+            "ConfirmPasswordRequired": "Confirm password is required",
+            "PasswordsDoNotMatch": "Passwords do not match"
+        }
+    },
+    "Account": {
+        "Labels": {
+            "FirstName": "FirstName",
+            "LastName": "LastName",
+            "AccountSuccessfullySaved": "Account saved successfully"
+        },
+        "Errors": {
+            "FirstNameRequired": "First Name is required",
+            "OnlyLettersRequired": "Only letters are allowed",
+            "LastNameRequired": "Last Name is required"
+        }
+    },
+    "ConfirmAccount": {
+        "Labels": {
+            "ConfirmSuccessful": "Account confirmed successfully",
+            "LoginLink": "Login"
+        }
+    },
+    "ForgotPassword": {
+        "Labels": {
+            "Email": "Email",
+            "ResetPassword": "Reset password",
+            "ResetSuccessful": "An email containing a link to change your password has been sent to the entered address"
+        },
+        "Errors": {
+            "EmailRequired": "Email is required",
+            "InvalidEmail": "Invalid email"
+        }
+    },
+    "ChangePassword": {
+        "Labels": {
+            "Password": "Password",
+            "ConfirmPassword": "Confirm Password",
+            "Submit": "Submit",
+            "ForgotPasswordLabel": "Forgot your password?",
+            "ForgotPasswordLink": "Reset",
+            "PasswordChangeSuccessfulLabel": "Password changed successfully",
+            "LoginLink": "Login"
+        },
+        "Errors": {
+            "PasswordRequired": "Password is required",
+            "InvalidPassword": "Password must have minimum 8 characters and contain at least one uppercase letter, one lowercase letter and one digit",
+            "ConfirmPasswordRequired": "Confirm password is required",
+            "PasswordsDoNotMatch": "Passwords do not match",
+            "PasswordTokenExpired": "Password reset link has expired."
+        }
+    },
+    "Apartments": {
+        "Labels": {
+            "Title": "Title",
+            "Description": "Description",
+            "Latitude": "Latitude",
+            "Longitude": "Longitude",
+            "NrRooms": "Number of rooms",
+            "PricePerMonth": "Price / month",
+            "Area": "Area",
+            "State": "State",
+            "Rented": "Rented",
+            "Available": "Available",
+            "Realtor": "Realtor",
+            "NewApartment": "New Apartment",
+            "MinArea": "Min area",
+            "MaxArea": "Max area",
+            "MinNrRooms": "Min number of rooms",
+            "MaxNrRooms": "Max number of rooms",
+            "MinPrice": "Min price/month",
+            "MaxPrice": "Max price/month",
+            "EditApartment": "Edit apartment"
+        },
+        "Errors": {
+            "InvalidValue": "Invalid value",
+            "TitleRequired": "Title is required",
+            "DescriptionRequired": "Description is required",
+            "LatitudeRequired": "Latitude is required",
+            "LongitudeRequired": "Longitude is required",
+            "AreaRequired": "Area is required",
+            "AreaInvalidValue": "Area must be a number",
+            "NrRoomsRequired": "Number of rooms is required",
+            "NrRoomsInvalidValue": "Number of rooms must be a natural number",
+            "PricePerMonthRequired": "Price per month is required",
+            "PricePerMonthInvalidValue": "Price per month must be a number",
+            "StateRequired": "State is required",
+            "RealtorRequired": "Realtor is required"
+        }
+    },
+    "Users": {
+        "Labels": {
+            "FirstName": "First Name",
+            "LastName": "Last Name",
+            "Email": "Email",
+            "Role": "Role",
+            "Active": "Active",
+            "Action": "Action",
+            "NewUser": "New User"
+        },
+        "Errors": {
+            "EmailRequired": "Email is required",
+            "InvalidEmail": "Invalid email",
+            "FirstNameRequired": "First Name is required",
+            "OnlyLettersRequired": "Only letters are allowed",
+            "LastNameRequired": "Last Name is required",
+            "RoleRequired": "Role is required"
+        }
+    }
+}

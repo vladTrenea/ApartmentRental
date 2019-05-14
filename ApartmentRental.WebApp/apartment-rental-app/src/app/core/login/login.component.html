@@ -1,0 +1,49 @@
+<div class="container">
+    <div id="login-box">
+        <div class="logo">
+            <img src="./assets/img/home-icon-logo.png" alt="ApRental logo" class="img img-responsive img-circle center-block"/>
+            <h1 class="logo-caption"><span class="tweak">L</span>ogin</h1>
+        </div><!-- /.logo -->
+        <div class="controls">
+            <form #loginForm="ngForm" (keyup.enter)="login(loginForm.form.valid)" novalidate>
+                <input #email="ngModel" id="email" type="email" name="email" class="form-control"
+                       placeholder="{{'Login.Labels.Email' | translate}}"
+                       [pattern]="emailRegex" [(ngModel)]="loginModel.email" appNotEmpty/>
+                <div *ngIf="formSubmitted">
+                    <div class="input-error" *ngIf="email.errors?.notEmpty">
+                        {{'Login.Errors.EmailRequired' | translate}}
+                    </div>
+
+                    <div class="input-error" *ngIf="!email.errors?.notEmpty && email.errors?.pattern">
+                        {{'Login.Errors.InvalidEmail' | translate}}
+                    </div>
+                </div>
+                <br/>
+
+                <input #password="ngModel" id="password" type="password" name="password" class="form-control"
+                       placeholder="{{'Login.Labels.Password' | translate}}" [(ngModel)]="loginModel.password" appNotEmpty/>
+                <div class="input-error" *ngIf="formSubmitted && password.errors">
+                    {{'Login.Errors.PasswordRequired' | translate}}
+                </div>
+
+                <div class="input-error api-error" *ngIf="errorMessage">
+                    {{errorMessage}}
+                </div>
+                <br/>
+
+                <button type="button" class="btn btn-default btn-block btn-custom" (click)="login(loginForm.form.valid)">
+                    {{'Login.Labels.Login' | translate}}
+                </button>
+                <br/>
+                <p class="forgot-password-text" align="center">
+                    <span>{{'Login.Labels.ForgotPasswordLabel' | translate}} </span>
+                    <a class="app-link" routerLink="/forgot-password"> {{'Login.Labels.ForgotPasswordLink' | translate}}</a>
+                </p>
+                <p class="register-text" align="center">
+                    <span>{{'Login.Labels.RegisterLabel' | translate}} </span>
+                    <a class="app-link" routerLink="/register"> {{'Login.Labels.RegisterLink' | translate}}</a>
+                </p>
+            </form>
+        </div><!-- /.controls -->
+    </div><!-- /#login-box -->
+</div><!-- /.container -->

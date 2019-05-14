@@ -1,0 +1,61 @@
+<div *ngIf="account">
+    <form #accountForm="ngForm" novalidate>
+        <div class="row">
+            <fieldset class="form-group col-lg-7 col-md-7">
+                <label class="ng-tns-c24-2" for="email">{{'Users.Labels.Email' | translate}}*</label>
+                <input #email="ngModel" class="form-control" type="email" id="email" name="email"
+                       [(ngModel)]="userAuthorization.email" readonly>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group col-lg-7 col-md-7">
+                <label class="ng-tns-c24-2" for="firstName">{{'Account.Labels.FirstName' | translate}}*</label>
+                <input #firstName="ngModel" class="form-control" type="text" id="firstName" name="firstName"
+                       [pattern]="onlyLettersRegex" maxlength="{{maxTextInputLength}}" [(ngModel)]="account.firstName" appNotEmpty>
+                <div *ngIf="formSubmitted">
+                    <div class="input-error" *ngIf="firstName.errors?.notEmpty">
+                        {{'Account.Errors.FirstNameRequired' | translate}}
+                    </div>
+
+                    <div class="input-error" *ngIf="!firstName.errors?.notEmpty && firstName.errors?.pattern">
+                        {{'Account.Errors.OnlyLettersRequired' | translate}}
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group col-lg-7 col-md-7">
+                <label class="ng-tns-c24-2" for="lastName">{{'Account.Labels.LastName' | translate}}*</label>
+                <input #lastName="ngModel" class="form-control" type="text" id="lastName" name="lastName"
+                       [pattern]="onlyLettersRegex" maxlength="{{maxTextInputLength}}" [(ngModel)]="account.lastName" appNotEmpty>
+                <div *ngIf="formSubmitted">
+                    <div class="input-error" *ngIf="lastName.errors?.notEmpty">
+                        {{'Account.Errors.LastNameRequired' | translate}}
+                    </div>
+
+                    <div class="input-error" *ngIf="!lastName.errors?.notEmpty && lastName.errors?.pattern">
+                        {{'Account.Errors.OnlyLettersRequired' | translate}}
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="row" *ngIf="errorMessage">
+            <fieldset class="form-group col-lg-8 col-md-8">
+                <div class="input-error form-server-error">
+                    {{errorMessage}}
+                </div>
+            </fieldset>
+        </div>
+        <div *ngIf="saved">
+            <p>{{'Account.Labels.AccountSuccessfullySaved' | translate}}</p>
+        </div>
+
+        <div>
+            <button class="btn btn-primary" type="button"
+                    (click)="save(accountForm.form.valid)">{{'Labels.Save' | translate}}</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,38 @@
+<div class="go-right">
+    <button class="btn btn-primary" (click)="goToAddUser()">{{'Users.Labels.NewUser' | translate}}</button>
+</div>
+
+<div *ngIf="users" class="page-container">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>{{'Users.Labels.Email' | translate}}</th>
+            <th>{{'Users.Labels.FirstName' | translate}}</th>
+            <th>{{'Users.Labels.LastName' | translate}}</th>
+            <th>{{'Users.Labels.Role' | translate}}</th>
+            <th>{{'Users.Labels.Active' | translate}}</th>
+            <th>{{'Users.Labels.Action' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.email}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.roleName}}</td>
+            <td>
+                <i class="fa fa-check" *ngIf="user.hasEmailConfirmed"></i>
+            </td>
+            <td>
+                <span class="action-item">
+                    <i class="fa fa-pencil" matTooltip="{{'Labels.Edit' | translate}}" aria-hidden="true" (click)="goToEditUser(user.id)"></i>
+                </span>
+                &nbsp;
+                <span class="action-item">
+                    <i class="fa fa-trash-o" matTooltip="{{'Labels.Delete' | translate}}" aria-hidden="true" (click)="onDeleteUserClick(user.id)"></i>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

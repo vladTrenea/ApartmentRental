@@ -1,0 +1,1 @@
+docker build --rm -f dev.dockerfil -t ap-rental-front:latest

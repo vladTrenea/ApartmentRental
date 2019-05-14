@@ -1,0 +1,17 @@
+agm-map {
+    height: 800px;
+}
+
+.apartments-list {
+    max-height: 500px !important;
+}
+
+.apartment-item {
+    margin-bottom: 10px;
+    border:solid 1px;
+    padding: 5px;
+}
+
+.apartment-title {
+    padding-left: 0;
+}

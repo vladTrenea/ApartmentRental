@@ -1,0 +1,1 @@
+docker run -p 4200:80 --name ap-rental-front ap-rental-front 

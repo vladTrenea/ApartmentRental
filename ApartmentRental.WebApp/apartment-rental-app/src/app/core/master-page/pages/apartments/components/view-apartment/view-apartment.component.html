@@ -1,0 +1,110 @@
+<div class="row" *ngIf="userAuthorization.roleId == roleEnum.admin || userAuthorization.roleId == roleEnum.realtor">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="go-right">
+            <button class="btn btn-primary" (click)="goToEditApartment()">{{'Labels.Edit' | translate}}</button>
+            &nbsp;
+            <button class="btn btn-danger" (click)="onDeleteClick()">{{'Labels.Delete' | translate}}</button>
+        </div>
+    </div>
+</div>
+<br/>
+
+<div class="row" #container *ngIf="apartment">
+    <div class="col-lg-5 col-md-5">
+
+        <div class="row">
+            <fieldset class="form-group">
+                <label for="title">{{'Apartments.Labels.Title' | translate}}</label>
+                <input #title="ngModel" class="form-control" type="text" id="title" name="title"
+                       [(ngModel)]="apartment.title" readonly>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="description">{{'Apartments.Labels.Description' | translate}}*</label>
+                <textarea #description="ngModel" class="form-control" id="description" name="description" rows="3"
+                          [(ngModel)]="apartment.description" readonly>
+                </textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group">
+                <label for="area">{{'Apartments.Labels.Area' | translate}}*</label>
+                <input #area="ngModel" class="form-control" type="text" id="area" name="area"
+                       [(ngModel)]="apartment.area" readonly>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group">
+                <label for="nrRooms">{{'Apartments.Labels.NrRooms' | translate}}*</label>
+                <input #nrRooms="ngModel" class="form-control" type="text" id="nrRooms" name="nrRooms"
+                       [(ngModel)]="apartment.nrOfRooms" readonly>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group">
+                <label for="pricePerMonth">{{'Apartments.Labels.PricePerMonth' | translate}}*</label>
+                <input #pricePerMonth="ngModel" class="form-control" type="text" id="pricePerMonth"
+                       name="pricePerMonth"
+                       [(ngModel)]="apartment.pricePerMonth" readonly>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group">
+                <label for="latitude">{{'Apartments.Labels.Latitude' | translate}}*</label>
+                <input #latitude="ngModel" class="form-control" type="text" id="latitude" name="latitude"
+                       [(ngModel)]="apartment.latitude" readonly>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group">
+                <label>{{'Apartments.Labels.Longitude' | translate}}*</label>
+                <input #longitude="ngModel" class="form-control" type="text" id="longitude" name="longitude"
+                       [(ngModel)]="apartment.longitude" readonly>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group">
+                <label for="state">{{'Apartments.Labels.State' | translate}}*</label>
+                <div *ngIf="apartment.isRented">
+                    <input class="form-control" type="text" name="state" id="state" value="{{'Apartments.Labels.Rented' | translate}}" readonly>
+                </div>
+                <div *ngIf="!apartment.isRented">
+                    <input class="form-control" type="text" name="state" id="state" value="{{'Apartments.Labels.Available' | translate}}" readonly>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="form-group">
+                <label for="realtor">{{'Apartments.Labels.Realtor' | translate}}*</label>
+                <input #realtor="ngModel" class="form-control" type="text" id="realtor" name="realtor"
+                       [(ngModel)]="apartment.realtorName" readonly>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <button class="btn btn-primary" type="button"
+                    (click)="goToApartmentsSearch()">{{'Labels.Back' | translate}}</button>
+        </div>
+    </div>
+
+    <div class="col-lg-7 col-md-7">
+        <agm-map #gm
+                 [style.height.px]="container.offsetHeight"
+                 [latitude]="apartment.latitude" [longitude]="apartment.longitude"
+                 [zoom]="mapZoom" [minZoom]="mapMinZoom">
+            <agm-marker [latitude]="apartment.latitude"
+                        [longitude]="apartment.longitude"
+                        [iconUrl]="apartment.isRented ? redMarkerIcon : blueMarkerIcon">
+            </agm-marker>
+        </agm-map>
+    </div>
+</div>

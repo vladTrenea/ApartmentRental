@@ -1,0 +1,18 @@
+<div>
+    <h1 mat-dialog-title>{{title}}</h1>
+    <div mat-dialog-content>
+        <p>{{message}}</p>
+    </div>
+    <br/>
+    <div mat-dialog-actions class="modal-footer">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <button type="button" class="btn btn-secondary btn-block"
+                    (click)="cancel()">{{'Labels.Cancel' | translate}}</button>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <button type="button" class="btn btn-primary btn-block" (click)="ok()">{{'Labels.Ok' | translate}}</button>
+        </div>
+    </div>
+</div>
+

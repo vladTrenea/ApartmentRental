@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.5.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApartmentRentalWebApi.Business.Core\ApartmentRentalWebApi.Business.Core.csproj" />
+    <ProjectReference Include="..\ApartmentRentalWebApi.Business.Impl\ApartmentRentalWebApi.Business.Impl.csproj" />
+    <ProjectReference Include="..\ApartmentRentalWebApi.Data\ApartmentRentalWebApi.Data.csproj" />
+    <ProjectReference Include="..\ApartmentRentalWebApi.Domain\ApartmentRentalWebApi.Domain.csproj" />
+    <ProjectReference Include="..\ApartmentRentalWebApi.TestModelBuilders\ApartmentRentalWebApi.TestModelBuilders.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Localization.Abstractions">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.localization.abstractions\2.2.0\lib\netstandard2.0\Microsoft.Extensions.Localization.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

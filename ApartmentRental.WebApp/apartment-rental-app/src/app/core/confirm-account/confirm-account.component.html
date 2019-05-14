@@ -1,0 +1,22 @@
+<div class="container">
+    <div id="login-box">
+        <div class="logo">
+            <h1 class="logo-caption"><span class="tweak">C</span>onfirm Account</h1>
+        </div><!-- /.logo -->
+        <div class="controls">
+            <div *ngIf="!confirmed">
+                <div class="input-error api-error" *ngIf="errorMessage">
+                    {{errorMessage}}
+                </div>
+            </div>
+            <div *ngIf="confirmed">
+                <p class="forgot-password-text" align="center">
+                    <span>{{'ConfirmAccount.Labels.ConfirmSuccessful' | translate}} </span>
+                    <br/>
+                    <br/>
+                    <a class="app-link" routerLink="/login"> {{'ConfirmAccount.Labels.LoginLink' | translate}}</a>
+                </p>
+            </div>
+        </div><!-- /.controls -->
+    </div><!-- /#login-box -->
+</div><!-- /.container -->

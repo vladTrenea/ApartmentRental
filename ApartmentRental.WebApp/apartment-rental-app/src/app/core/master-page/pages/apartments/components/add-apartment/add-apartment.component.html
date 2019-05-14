@@ -1,0 +1,161 @@
+<div class="row" #container>
+    <div class="col-lg-5 col-md-5">
+        <form #addApartmentForm="ngForm" (keyup.enter)="submitApartment(addApartmentForm.form.valid)" novalidate>
+
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="title">{{'Apartments.Labels.Title' | translate}}*</label>
+                    <input #title="ngModel" class="form-control" type="text" id="title" name="title"
+                           [(ngModel)]="apartment.title" maxlength="{{maxTextInputLength}}" appNotEmpty>
+                    <div class="input-error" *ngIf="formSubmitted && title.errors">
+                        {{'Apartments.Errors.TitleRequired' | translate}}
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="description">{{'Apartments.Labels.Description' | translate}}*</label>
+                    <textarea #description="ngModel" class="form-control" id="description" name="description" rows="3"
+                              [(ngModel)]="apartment.description" appNotEmpty>
+                    </textarea>
+                    <div class="input-error" *ngIf="formSubmitted && description.errors">
+                        {{'Apartments.Errors.DescriptionRequired' | translate}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="area">{{'Apartments.Labels.Area' | translate}} (m<sup>2</sup>)*</label>
+                    <input #area="ngModel" class="form-control" type="text" id="area" name="area"
+                           [pattern]="doubleNumberRegex" [(ngModel)]="apartment.area" maxlength="{{maxLengthApartmentArea}}" appNotEmpty>
+                    <div *ngIf="formSubmitted">
+                        <div class="input-error" *ngIf="area.errors?.notEmpty">
+                            {{'Apartments.Errors.AreaRequired' | translate}}
+                        </div>
+                        <div class="input-error" *ngIf="!area.errors?.notEmpty && area.errors?.pattern">
+                            {{'Apartments.Errors.AreaInvalidValue' | translate}}
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="nrRooms">{{'Apartments.Labels.NrRooms' | translate}}*</label>
+                    <input #nrRooms="ngModel" class="form-control" type="text" id="nrRooms" name="nrRooms"
+                           [pattern]="naturalNumberRegex" [(ngModel)]="apartment.nrOfRooms" maxlength="{{maxLengthApartmentRooms}}" appNotEmpty>
+                    <div *ngIf="formSubmitted">
+                        <div class="input-error" *ngIf="nrRooms.errors?.notEmpty">
+                            {{'Apartments.Errors.NrRoomsRequired' | translate}}
+                        </div>
+
+                        <div class="input-error" *ngIf="!nrRooms.errors?.notEmpty && nrRooms.errors?.pattern">
+                            {{'Apartments.Errors.NrRoomsInvalidValue' | translate}}
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="pricePerMonth">{{'Apartments.Labels.PricePerMonth' | translate}}*</label>
+                    <input #pricePerMonth="ngModel" class="form-control" type="text" id="pricePerMonth"
+                           name="pricePerMonth"
+                           [pattern]="doubleNumberRegex" [(ngModel)]="apartment.pricePerMonth" maxlength="{{maxLengthApartmentPrice}}" appNotEmpty>
+                    <div *ngIf="formSubmitted">
+                        <div class="input-error" *ngIf="pricePerMonth.errors?.notEmpty">
+                            {{'Apartments.Errors.PricePerMonthRequired' | translate}}
+                        </div>
+                        <div class="input-error" *ngIf="!pricePerMonth.errors?.notEmpty && pricePerMonth.errors?.pattern">
+                            {{'Apartments.Errors.PricePerMonthInvalidValue' | translate}}
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="latitude">{{'Apartments.Labels.Latitude' | translate}}*</label>
+                    <input #latitude="ngModel" class="form-control" type="text" id="latitude" name="latitude"
+                           [pattern]="doubleNumberRegex" [(ngModel)]="apartment.latitude" appNotEmpty readonly>
+                    <div class="input-error" *ngIf="formSubmitted && latitude.errors">
+                        {{'Apartments.Errors.LatitudeRequired' | translate}}
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="longitude">{{'Apartments.Labels.Longitude' | translate}}*</label>
+                    <input #longitude="ngModel" class="form-control" type="text" id="longitude" name="longitude"
+                           [pattern]="doubleNumberRegex" [(ngModel)]="apartment.longitude" appNotEmpty readonly>
+                    <div class="input-error" *ngIf="formSubmitted && longitude.errors">
+                        {{'Apartments.Errors.LongitudeRequired' | translate}}
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="state">{{'Apartments.Labels.State' | translate}}*</label>
+                    <br/>
+                    <mat-radio-group #state [(ngModel)]="apartment.isRented" name="state" id="state">
+                        <mat-radio-button name="state"
+                                          [value]="false">{{'Apartments.Labels.Available' | translate}}</mat-radio-button>
+                        &nbsp;
+                        <mat-radio-button name="state"
+                                          [value]="true">{{'Apartments.Labels.Rented' | translate}}</mat-radio-button>
+                    </mat-radio-group>
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="realtor">{{'Apartments.Labels.Realtor' | translate}}*</label>
+                    <select #realtor="ngModel" class="form-control" id="realtor" name="realtor"
+                            [(ngModel)]="selectedRealtorId" appNotEmpty>
+                        <option *ngFor="let user of realtors" [ngValue]="user.id">
+                            {{user.firstName}} {{user.lastName}}
+                        </option>
+                    </select>
+                    <div class="input-error" *ngIf="formSubmitted && realtor.errors">
+                        {{'Apartments.Errors.RealtorRequired' | translate}}
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="row" *ngIf="errorMessage">
+                <fieldset class="form-group">
+                    <div class="input-error form-server-error">
+                        {{errorMessage}}
+                    </div>
+                </fieldset>
+            </div>
+            <br/>
+
+            <div class="row">
+                <button class="btn btn-primary" type="button"
+                        (click)="submitApartment(addApartmentForm.form.valid)">{{'Labels.Save' | translate}}</button>
+                &nbsp;
+                <button class="btn btn-danger" type="button"
+                        (click)="goToApartmentsSearch()">{{'Labels.Cancel' | translate}}</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-7 col-md-7">
+        <agm-map #gm
+                 [style.height.px]="container.offsetHeight"
+                 [latitude]="mapCenterLatitude" [longitude]="mapCenterLongitude"
+                 [zoom]="mapZoom" [minZoom]="mapMinZoom"
+                 (mapClick)="onMapClick($event)">
+            <agm-marker *ngIf="apartment.latitude && apartment.longitude"
+                        [latitude]="apartment.latitude"
+                        [longitude]="apartment.longitude"
+                        [iconUrl]="apartment.isRented ? redMarkerIcon : blueMarkerIcon">
+            </agm-marker>
+        </agm-map>
+    </div>
+</div>
